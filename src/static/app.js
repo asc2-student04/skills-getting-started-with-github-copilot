@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const activitySelect = document.getElementById("activity");
   const signupForm = document.getElementById("signup-form");
   const messageDiv = document.getElementById("message");
+  const submitButton = signupForm.querySelector('button[type="submit"]');
 
   // Function to fetch activities from API
   async function fetchActivities() {
@@ -47,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const email = document.getElementById("email").value;
     const activity = document.getElementById("activity").value;
+    submitButton.disabled = true;
 
     try {
       const response = await fetch(
@@ -78,6 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
       messageDiv.className = "error";
       messageDiv.classList.remove("hidden");
       console.error("Error signing up:", error);
+    } finally {
+      submitButton.disabled = false;
     }
   });
 
